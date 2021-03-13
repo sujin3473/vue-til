@@ -1,22 +1,15 @@
 <template>
-	<div id="app">
-		<app-header></app-header>
+	<div>
+		<header>
+			<router-link to="/login">로그인</router-link> |
+			<router-link to="/signup">회원가입</router-link>
+		</header>
+		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue';
-import AppHeader from '@/components/common/AppHeader.vue';
-
-export default {
-	name: 'App',
-	components: {
-		AppHeader,
-	},
-	created() {
-		console.log('hi');
-	},
-};
+export default {};
 </script>
 
 <style>
