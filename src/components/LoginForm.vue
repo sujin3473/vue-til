@@ -15,6 +15,7 @@
 
 <script>
 import { loginUser } from '@/api/index';
+import { validateEmail } from '@/utils/validation';
 
 export default {
 	data: () => ({
@@ -22,16 +23,27 @@ export default {
 		password: '',
 		logMessage: '',
 	}),
+	computed: {
+		isUsernameValid() {
+			return validateEmail(this.username);
+		},
+	},
 	methods: {
 		async submitForm() {
-			const userData = {
-				username: this.username,
-				password: this.password,
-			};
-			const { data } = await loginUser(userData);
-			console.log(data.user.username);
-			this.logMessage = `${this.username}님 환영합니다.`;
-			this.initForm();
+			try {
+				const userData = {
+					username: this.username,
+					password: this.password,
+				};
+				const { data } = await loginUser(userData);
+				console.log(data.user.username);
+				this.logMessage = `${this.username}님 환영합니다.`;
+			} catch (error) {
+				console.log(error.response.data);
+				this.logMessage = error.response.data;
+			} finally {
+				this.initForm();
+			}
 		},
 		initForm() {
 			this.username = '';
