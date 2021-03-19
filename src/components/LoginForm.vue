@@ -8,7 +8,7 @@
 			<label for="password">password: </label>
 			<input id="password" type="text" v-model="password" />
 		</div>
-		<button>로그인</button>
+		<button :disabled="!isUsernameValid || !password">로그인</button>
 		<p>{{ this.logMessage }}</p>
 	</form>
 </template>
