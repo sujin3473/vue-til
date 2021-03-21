@@ -23,7 +23,6 @@
 					로그인
 				</button>
 			</form>
-			<p class="log">{{ logMessage }}</p>
 		</div>
 	</div>
 </template>
@@ -52,8 +51,9 @@ export default {
 				};
 				const { data } = await loginUser(userData);
 				console.log(data.user.username);
+				this.$store.commit('setUsername', data.user.username);
+				// this.logMessage = `${data.user.username}님 환영합니다.`;
 				this.$router.push('/main');
-				this.logMessage = `${this.username}님 환영합니다.`;
 			} catch (error) {
 				console.log(error.response.data);
 				this.logMessage = error.response.data;
