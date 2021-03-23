@@ -2,9 +2,7 @@
 	<div>
 		<div class="main list-container contents">
 			<h1 class="page-header">Today I Learned</h1>
-			<div v-if="isLoading">
-				<loading-spinner></loading-spinner>
-			</div>
+			<loading-spinner v-if="isLoading"></loading-spinner>
 			<ul v-else>
 				<post-list-item
 					v-for="postItem in postItems"
