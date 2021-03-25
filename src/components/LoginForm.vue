@@ -28,9 +28,7 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/index';
 import { validateEmail } from '@/utils/validation';
-import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies';
 
 export default {
 	data: () => ({
@@ -50,12 +48,8 @@ export default {
 					username: this.username,
 					password: this.password,
 				};
-				const { data } = await loginUser(userData);
-				console.log(data.token);
-				this.$store.commit('setToken', data.token);
-				this.$store.commit('setUsername', data.user.username);
-				saveAuthToCookie(data.token);
-				saveUserToCookie(data.user.username);
+				await this.$store.dispatch('LOGIN', userData);
+				//로그인 처리가 끝나고 main으로 이동해야되기 때문에 꼭 await를 넣어준다.
 				this.$router.push('/main');
 			} catch (error) {
 				console.log(error.response.data);
