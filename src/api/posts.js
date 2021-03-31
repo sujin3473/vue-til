@@ -21,4 +21,9 @@ function deletePost(postId) {
 	return post.delete(postId);
 }
 
-export { fetchPosts, fetchPost, createPost, deletePost };
+// 학습 노트 수정 API
+function editPost(postId, postData) {
+	return post.put(postId, postData);
+}
+
+export { fetchPosts, fetchPost, createPost, deletePost, editPost };
